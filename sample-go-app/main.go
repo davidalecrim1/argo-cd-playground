@@ -15,6 +15,10 @@ func main() {
 		w.Write([]byte("pong!"))
 	})
 
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	log.Println("Listening in port :8081")
 	log.Fatal(http.ListenAndServe(":8081", mux))
 }

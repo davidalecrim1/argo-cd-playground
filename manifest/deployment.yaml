@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
       - name: sample-go-app
-        image: sample-go-app:v1.0.0
+        image: sample-go-app:v1.0.1
         imagePullPolicy: Never
         ports:
         - containerPort: 8081
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
