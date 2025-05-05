@@ -1,11 +1,25 @@
-# Argo CD Playground with Kind
+# Argo CD Playground: GitOps with Kind, Kubernetes & Go
 
-## Technologies
-- Kind 
+## Overview
+This project is a hands-on playground to learn and demonstrate GitOps using Argo CD, Kubernetes, and Kind. It features a simple Go web application, containerized and deployed to a local Kubernetes cluster managed by Kind, with manifests and automation for continuous delivery via Argo CD.
 
-## Step by Step
+### What Was Done
+- Developed a minimal Go web app with health and ping endpoints.
+- Dockerized the app for ARM64 and built/published with Makefile.
+- Created Kubernetes manifests (Deployment, Service, Argo CD Application) for automated deployment.
+- Documented step-by-step setup for Kind, Argo CD, and app deployment.
 
-### Install and Setup Kind
+## Technologies Used
+- Kind (Kubernetes in Docker) - v0.27.0
+- Argo CD (GitOps continuous delivery) - v2.14.11
+- Go (sample app) - v1.24
+- Docker - v27.4.0
+- Helm - v3.17.3
+- kubectl - v1.33.0
+
+## Quick Start
+
+### 1. Install and Setup Kind
 
 For MacOS:
 ```bash
@@ -17,7 +31,7 @@ Check installation:
 kind version
 ```
 
-Creater a cluster:
+Create a cluster:
 ```bash
 kind create cluster
 ```
@@ -33,12 +47,12 @@ kubectl cluster-info --context kind-kind
 kubectl get nodes
 ```
 
-The config form the kind context is in:
+The config from the kind context is in:
 ```bash
 code ~/.kube/config
 ```
 
-### Install Argo CD
+### 2. Install Argo CD
 
 Install Helm in MacOS:
 ```bash
@@ -54,7 +68,7 @@ helm install argocd argo/argo-cd --namespace argocd --create-namespace
 helm install argocd argo/argo-cd --namespace argocd --create-namespace -f values.yaml
 ```
 
-Port foward ArgoCD to the localhost:
+Port forward ArgoCD to the localhost:
 ```bash
 kubectl port-forward service/argocd-server -n argocd 8080:443
 ```
@@ -64,7 +78,7 @@ Get the default password from the installation:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
-### Running an app with ArgoCD
+### 3. Build & Deploy the Sample Go App
 Use the created app in `sample-go-app` folder.
 
 Build the image locally using the Makefile:
@@ -74,18 +88,15 @@ make build
 
 Load the image to kind:
 ```bash
-kind load docker-image sample-go-app:latest
+kind load docker-image sample-go-app:v1.0.1
 ```
 
-Update the Application manifest as you see fit, then:
+Apply the Argo CD Application manifest:
 ```bash
-cd manifest && k apply -f application.yaml
+cd manifest && kubectl apply -f application.yaml
 ```
 
-Foward port of the Go app to the localhost:
+Forward the Go app port to localhost:
 ```bash
 kubectl port-forward service/sample-go-app-service 8081:8081
 ```
-
-
-
