@@ -82,5 +82,10 @@ Update the Application manifest as you see fit, then:
 cd manifest && k apply -f application.yaml
 ```
 
+Foward port of the Go app to the localhost:
+```bash
+kubectl port-forward service/sample-go-app-service 8081:8081
+```
+
 
 

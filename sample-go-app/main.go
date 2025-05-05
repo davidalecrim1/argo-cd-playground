@@ -15,6 +15,6 @@ func main() {
 		w.Write([]byte("pong!"))
 	})
 
-	log.Println("Listening in port :8080")
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Println("Listening in port :8081")
+	log.Fatal(http.ListenAndServe(":8081", mux))
 }
