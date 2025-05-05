@@ -4,8 +4,10 @@ metadata:
   name: sample-go-app
 spec:
   selector:
+    replicas: 2
     matchLabels:
       app: sample-go-app
+  
   template:
     metadata:
       labels:

@@ -65,11 +65,22 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 ### Running an app with ArgoCD
-Use the created app in `sample-app-go` folder.
+Use the created app in `sample-go-app` folder.
 
 Build the image locally using the Makefile:
 ```bash
 make build
 ```
+
+Load the image to kind:
+```bash
+kind load docker-image sample-go-app:latest
+```
+
+Update the Application manifest as you see fit, then:
+```bash
+cd manifest && k apply -f application.yaml
+```
+
 
 
