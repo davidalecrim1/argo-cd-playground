@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-go-app
+spec:
+  selector:
+    matchLabels:
+      app: sample-go-app
+  template:
+    metadata:
+      labels:
+        app: sample-go-app
+    spec:
+      containers:
+      - name: sample-go-app
+        image: sample-go-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8081
