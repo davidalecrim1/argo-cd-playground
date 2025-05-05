@@ -107,3 +107,6 @@ Forward the Go app port to localhost:
 ```bash
 kubectl port-forward service/sample-go-app-service 8081:8081
 ```
+
+## References
+- [ArgoCD Tutorial for Beginners | GitOps CD for Kubernetes](https://www.youtube.com/watch?v=MeU5_k9ssrs)
