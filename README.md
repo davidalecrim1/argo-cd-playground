@@ -20,6 +20,7 @@ This project is a hands-on playground to learn and demonstrate GitOps using Argo
 ## Quick Start
 
 ### 1. Install and Setup Kind
+---
 
 For MacOS:
 ```bash
@@ -52,7 +53,10 @@ The config from the kind context is in:
 code ~/.kube/config
 ```
 
+
 ### 2. Install Argo CD
+---
+
 
 Install Helm in MacOS:
 ```bash
@@ -78,7 +82,10 @@ Get the default password from the installation:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+
 ### 3. Build & Deploy the Sample Go App
+---
+
 Use the created app in `sample-go-app` folder.
 
 Build the image locally using the Makefile:
